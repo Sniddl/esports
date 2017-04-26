@@ -1,12 +1,14 @@
 @extends('home')
 @section('panel')
 
+<modal id="consoles-modal" action="/add/console" title="Add Console" name="Console"></modal>
+
 <div class="panel panel-default">
   <div class="panel-heading color-panel-headers">Consoles
     <button class="btn btn-sm btn-primary pull-right"
             type="submit"
             data-toggle="modal"
-            data-target="#games-modal">
+            data-target="#consoles-modal">
             Add Console
     </button>
   </div>

@@ -1,6 +1,9 @@
 @extends('home')
 @section('panel')
 
+
+<modal id="players-modal" action="/add/player" title="Add Player" name="Player"></modal>
+
 <div class="panel panel-default">
   <div class="panel-heading color-panel-headers" >Players
 
