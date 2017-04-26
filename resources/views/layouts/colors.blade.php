@@ -35,7 +35,5 @@
     background-color:  <?php echo Color::hex('foreground') ?> !important;
     color: #fff !important;
   }
-  .color-accent:not(.nocolor) {
 
-  }
 </style>

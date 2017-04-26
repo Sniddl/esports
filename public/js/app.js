@@ -2451,7 +2451,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onChange: function onChange(val) {
       this.colors = val;
       this.eyedropper = this.getContrast(this.colors);
-      console.log(this.eyedropper);
+      console.log(this.colors);
     },
     onFocus: function onFocus() {
       alert();

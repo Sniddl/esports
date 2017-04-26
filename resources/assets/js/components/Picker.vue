@@ -63,7 +63,6 @@
           onChange: function (val) {
             this.colors = val
             this.eyedropper = this.getContrast(this.colors)
-            console.log(this.eyedropper);
           },
           onFocus: function () {
             alert()
