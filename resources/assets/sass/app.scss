@@ -1,0 +1,219 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+// @import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.panel-heading {
+  background-color: #f5f5f5 !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  color: #333 !important;
+  line-height: 30px;
+}
+
+.btn-full {
+    width: 100%;
+    border-radius: 0;
+    outline: none;
+    border: none;
+}
+#app > .container {
+    margin-top: 70px;
+}
+
+
+.panel-image {
+    vertical-align: middle;
+    width: 100%;
+    border-radius: 100%;
+}
+
+.panel-body {
+    padding: 15px;
+}
+
+[class*='list-group'] {
+  border-left: none;
+  border-right: none;
+}
+
+.col-sm-4:nth-child(3n+1) {
+    clear: left;
+}
+
+a.social-media {
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+    color: #888;
+}
+
+a.social-media:hover {
+    color: black;
+}
+
+.no-border{
+  border-radius: 0px !important;
+}
+
+ul.collapse li {
+    padding: 10px 40px;
+}
+
+.vue-color__swatches {
+    width: 235px;
+    border-radius: 4px;
+}
+.vue-color__chrome {
+    position: absolute;
+    z-index: 3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#dropzone {
+  position: relative;
+  border: 10px dotted;
+  border-radius: 20px;
+  font: bold 24px/200px arial;
+  height: 200px;
+  margin: 30px auto;
+  text-align: center;
+  width: 200px;
+}
+
+#dropzone.hover {
+  border: 10px solid #FE5;
+  color: #FE5;
+}
+
+#dropzone.dropped {
+  background: #222;
+  border: 10px solid #444;
+}
+
+#dropzone div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 80px;
+    line-height: 166px;
+}
+
+#dropzone img {
+    border-radius: 2px;
+    vertical-align: middle;
+    max-width: 95%;
+    max-height: 95%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#dropzone [type="file"] {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+.dz-default.dz-message {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.material-switch > input[type="checkbox"] {
+    display: none;
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative;
+    width: 40px;
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
+}
