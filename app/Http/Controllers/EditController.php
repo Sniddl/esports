@@ -28,7 +28,7 @@ class EditController extends Controller
         $c->socials()->detach();
         $c->consoles()->detach();
         $c->games()->detach();
-        
+
         foreach ($r->consoles as $console) {
           $cons = Console::find($console);
           $username = 'console-'.$console;
@@ -50,3 +50,5 @@ class EditController extends Controller
       return back();
     }
 }
+
+//testing hook
