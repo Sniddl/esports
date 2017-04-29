@@ -50,5 +50,3 @@ class EditController extends Controller
       return back();
     }
 }
-
-//testing hook
