@@ -40,7 +40,7 @@ class CreationController extends Controller
       if ($thing === 'Player'){
         foreach ($r->consoles as $console) {
           $cons = Console::find($console);
-          $username = $cons->id.'-username';
+          $username = 'console-'.$cons->id;
           $c->consoles()->save($cons, ['username' => $r->$username]);
         }
 
@@ -51,8 +51,8 @@ class CreationController extends Controller
 
         foreach ($r->socials as $id) {
           $social = Social::find($id);
-          $url = $social->id.'-url';
-          $c->socials()->save($social, ['url' => $r->$url]);
+          $username = 'social-'.$social->id;
+          $c->socials()->save($social, ['username' => $r->$username]);
         }
       }
       return back();

@@ -22,6 +22,6 @@ class Player extends Model
 
     public function socials()
     {
-        return $this->belongsToMany('App\Social')->withPivot('url')->withTrashed();
+        return $this->belongsToMany('App\Social')->withPivot('username')->withTrashed();
     }
 }

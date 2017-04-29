@@ -22,6 +22,7 @@ Vue.component('picker', require('./components/Picker.vue'));
 Vue.component('toggle', require('./components/Toggle.vue'));
 Vue.component('discord-roles', require('./components/Discord-Roles.vue'));
 Vue.component('discord-register', require('./components/Discord-Register.vue'));
+Vue.component('edit-player', require('./components/Edit-Player.vue'));
 Vue.component('pulse-loader', require('vue-spinner/src/PulseLoader.vue'));
 // Vue.component('Photoshop', require('vue-color'));
 
@@ -39,7 +40,9 @@ const vm = new Vue({
         players: {}
       },
       sortType: 'Player',
-      loading: true
+      loading: true,
+      showEdit: false,
+      currentPlayerBeingEdited: {}
     },
     methods: {
       sniddl: function (e) {
@@ -93,5 +96,8 @@ const vm = new Vue({
       })
 
       $('input').attr('autocomplete','off')
+    },
+    computed: {
+      csrf: function () { return window.Laravel.csrfToken }
     }
 });

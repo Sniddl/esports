@@ -1063,6 +1063,7 @@ Vue.component('picker', __webpack_require__(53));
 Vue.component('toggle', __webpack_require__(55));
 Vue.component('discord-roles', __webpack_require__(50));
 Vue.component('discord-register', __webpack_require__(49));
+Vue.component('edit-player', __webpack_require__(78));
 Vue.component('pulse-loader', __webpack_require__(48));
 // Vue.component('Photoshop', require('vue-color'));
 
@@ -1080,7 +1081,9 @@ var vm = new Vue({
       players: {}
     },
     sortType: 'Player',
-    loading: true
+    loading: true,
+    showEdit: false,
+    currentPlayerBeingEdited: {}
   },
   methods: {
     sniddl: function sniddl(e) {
@@ -1136,6 +1139,12 @@ var vm = new Vue({
     });
 
     $('input').attr('autocomplete', 'off');
+  },
+
+  computed: {
+    csrf: function csrf() {
+      return window.Laravel.csrfToken;
+    }
   }
 });
 
@@ -1150,8 +1159,8 @@ var vm = new Vue({
 /***/ (function(module, exports) {
 
 module.exports = {
-	"client": "303316271678750722",
-	"token": "MzAzMzE2MjcxNjc4NzUwNzIy.C9WU3Q.13NCmcmPVOZSrSgmMCohqsQPqrE"
+	"client": "306859980030738442",
+	"token": "MzA2ODU5OTgwMDMwNzM4NDQy.C-J5Kw.GFV8-OU3Ag3lGYoazfN5i41L7kY"
 };
 
 /***/ }),
@@ -2222,9 +2231,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['obj'],
+  // data() {
+  //   return {
+  //     showEdit: false
+  //   }
+  // },
   mounted: function mounted() {
     // console.log(typeof this.object)
   },
@@ -2234,6 +2250,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       e.preventDefault();
       this.$emit('remove');
       axios.post('/delete', this.obj);
+    },
+    edit: function edit(e) {
+      this.$parent.showEdit = true;
+      this.$parent.currentPlayerBeingEdited = this.obj;
+      console.log(this.obj);
     }
   }
 });
@@ -2368,12 +2389,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     console.log(this.$parent.consoles);
-  },
-
-  computed: {
-    csrf: function csrf() {
-      return window.Laravel.csrfToken;
-    }
   }
 });
 
@@ -2451,7 +2466,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     onChange: function onChange(val) {
       this.colors = val;
       this.eyedropper = this.getContrast(this.colors);
-      console.log(this.colors);
     },
     onFocus: function onFocus() {
       alert();
@@ -34873,7 +34887,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('a', {
       staticClass: "social-media color-panel-headers",
       attrs: {
-        "href": social.pivot.url
+        "href": social.base_url + social.pivot.username
       }
     }, [_c('i', {
       class: 'fa fa-' + social.name.toLowerCase(),
@@ -34924,7 +34938,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "_token"
     },
     domProps: {
-      "value": _vm.csrf
+      "value": _vm.$parent.csrf
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "modal-header",
@@ -35079,7 +35093,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       staticClass: "form-control",
       attrs: {
         "type": "text",
-        "name": _vm.selectedConsole(selected).id + '-username',
+        "name": 'console-' + _vm.selectedConsole(selected).id,
         "placeholder": "username",
         "required": "required"
       }
@@ -35135,12 +35149,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       attrs: {
         "for": ""
       }
-    }, [_vm._v(_vm._s(_vm.selectedSocial(selected).name) + " URL")]), _vm._v(" "), _c('input', {
+    }, [_vm._v(_vm._s(_vm.selectedSocial(selected).name) + " Username")]), _vm._v(" "), _c('input', {
       staticClass: "form-control",
       attrs: {
         "type": "text",
-        "name": _vm.selectedSocial(selected).id + '-url',
-        "placeholder": "url",
+        "name": 'social-' + _vm.selectedSocial(selected).id,
+        "placeholder": "username",
         "required": "required"
       }
     })])
@@ -35215,6 +35229,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n  " + _vm._s(_vm.obj.name) + "\n  "), _c('span', {
     staticClass: "pull-right"
   }, [_c('button', {
+    staticClass: "btn btn-success btn-xs ",
+    attrs: {
+      "type": "button"
+    },
+    on: {
+      "click": _vm.edit
+    }
+  }, [_c('span', {
+    staticClass: "glyphicon glyphicon-edit"
+  }), _vm._v(" Edit\n    ")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-danger btn-xs ",
     attrs: {
       "type": "button"
@@ -44857,6 +44881,395 @@ module.exports = Vue$3;
 __webpack_require__(11);
 module.exports = __webpack_require__(12);
 
+
+/***/ }),
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: [],
+  data: function data() {
+    return {
+      player: {},
+      selectedConsoles: [],
+      selectedGames: [],
+      selectedSocials: []
+    };
+  },
+
+  methods: {
+    hideEdit: function hideEdit(e) {
+      this.$parent.showEdit = false;
+    },
+    selectedConsole: function selectedConsole(id) {
+      var p = this.$parent.currentPlayerBeingEdited.consoles;
+      if (p.length > 0) {
+        var c = p.filter(function (obj) {
+          return obj.id == id;
+        });
+      }
+      if (p.length == 0 || c.length == 0) {
+        var c = this.$parent.consoles.filter(function (obj) {
+          return obj.id == id;
+        });
+      }
+
+      if (c[0].pivot == undefined) {
+        c[0].pivot = {};
+      }
+      return c[0];
+    },
+    selectedSocial: function selectedSocial(id) {
+      var p = this.$parent.currentPlayerBeingEdited.socials;
+      if (p.length > 0) {
+        var s = p.filter(function (obj) {
+          return obj.id == id;
+        });
+      }
+      if (p.length == 0 || s.length == 0) {
+        var s = this.$parent.socials.filter(function (obj) {
+          return obj.id == id;
+        });
+      }
+
+      if (s[0].pivot == undefined) {
+        s[0].pivot = {};
+      }
+
+      return s[0];
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.player = this.$parent.currentPlayerBeingEdited;
+    var p = this.$parent.currentPlayerBeingEdited;
+    p.consoles.forEach(function (c) {
+      _this.selectedConsoles.push(c.id);
+    });
+    p.games.forEach(function (g) {
+      _this.selectedGames.push(g.id);
+    });
+    p.socials.forEach(function (s) {
+      _this.selectedSocials.push(s.id);
+    });
+  }
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(77),
+  /* template */
+  __webpack_require__(79),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Volumes/Storage/Code/fear/resources/assets/js/components/Edit-Player.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Edit-Player.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-935c0160", Component.options)
+  } else {
+    hotAPI.reload("data-v-935c0160", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('form', {
+    staticClass: "dropzone",
+    attrs: {
+      "action": "/edit/Player",
+      "method": "post",
+      "enctype": "multipart/form-data"
+    }
+  }, [_c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "_token"
+    },
+    domProps: {
+      "value": _vm.$parent.csrf
+    }
+  }), _vm._v(" "), _c('input', {
+    attrs: {
+      "type": "hidden",
+      "name": "id"
+    },
+    domProps: {
+      "value": _vm.$parent.currentPlayerBeingEdited.id
+    }
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('ul', {
+    staticClass: "list-group",
+    staticStyle: {
+      "padding": "10px"
+    }
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("name")]), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "Player-input",
+      "required": "required"
+    },
+    domProps: {
+      "value": _vm.$parent.currentPlayerBeingEdited.name
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Game")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.selectedGames),
+      expression: "selectedGames"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "multiple": "",
+      "name": "games[]",
+      "required": ""
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.selectedGames = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((this.$parent.games), function(game) {
+    return _c('option', {
+      domProps: {
+        "value": game.id
+      }
+    }, [_vm._v(_vm._s(game.name))])
+  }))]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Console")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.selectedConsoles),
+      expression: "selectedConsoles"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "multiple": "",
+      "name": "consoles[]",
+      "required": ""
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.selectedConsoles = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((this.$parent.consoles), function(con) {
+    return _c('option', {
+      domProps: {
+        "value": con.id
+      }
+    }, [_vm._v(_vm._s(con.name))])
+  }))]), _vm._v(" "), _vm._l((_vm.selectedConsoles), function(selected) {
+    return _c('div', {
+      key: selected.id,
+      staticClass: "form-group"
+    }, [_c('label', {
+      attrs: {
+        "for": ""
+      }
+    }, [_vm._v(_vm._s(_vm.selectedConsole(selected).name) + " Username")]), _vm._v(" "), _c('input', {
+      staticClass: "form-control",
+      attrs: {
+        "type": "text",
+        "name": 'console-' + _vm.selectedConsole(selected).id,
+        "required": "required"
+      },
+      domProps: {
+        "value": _vm.selectedConsole(selected).pivot.username
+      }
+    })])
+  }), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("Social Media")]), _vm._v(" "), _c('select', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.selectedSocials),
+      expression: "selectedSocials"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "multiple": "",
+      "name": "socials[]",
+      "required": ""
+    },
+    on: {
+      "change": function($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function(o) {
+          return o.selected
+        }).map(function(o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val
+        });
+        _vm.selectedSocials = $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+      }
+    }
+  }, _vm._l((this.$parent.socials), function(social) {
+    return _c('option', {
+      domProps: {
+        "value": social.id
+      }
+    }, [_vm._v(_vm._s(social.name))])
+  }))]), _vm._v(" "), _vm._l((_vm.selectedSocials), function(selected) {
+    return _c('div', {
+      key: selected.id,
+      staticClass: "form-group"
+    }, [_c('label', {
+      attrs: {
+        "for": ""
+      }
+    }, [_vm._v(_vm._s(_vm.selectedSocial(selected).name) + " Username")]), _vm._v(" "), _c('input', {
+      staticClass: "form-control",
+      attrs: {
+        "type": "text",
+        "name": 'social-' + _vm.selectedSocial(selected).id,
+        "required": "required"
+      },
+      domProps: {
+        "value": _vm.selectedSocial(selected).pivot.username
+      }
+    })])
+  })], 2)])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-heading color-panel-headers"
+  }, [_vm._v("Edit Player\n      "), _c('button', {
+    staticClass: "btn btn-sm btn-primary pull-right",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("\n              Save Player\n      ")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-935c0160", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

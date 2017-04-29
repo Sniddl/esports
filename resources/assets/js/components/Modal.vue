@@ -4,7 +4,7 @@
       <div class="modal-content">
 
         <form class="dropzone" :action="'/add/' + name" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="_token" :value="csrf">
+          <input type="hidden" name="_token" :value="$parent.csrf">
           <div class="modal-header" style="padding-bottom: 0;">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <ul class="nav nav-tabs" v-if="name === 'Player'" style="margin-bottom: -1px;">
@@ -56,7 +56,7 @@
               </div>
               <div class="form-group" v-for="selected in selectedConsoles" :key="selected.id">
                 <label for="">{{selectedConsole(selected).name}} Username</label>
-                <input type="text" class="form-control" :name="selectedConsole(selected).id + '-username'" placeholder="username" required="required">
+                <input type="text" class="form-control" :name="'console-'+selectedConsole(selected).id " placeholder="username" required="required">
               </div>
             </div>
 
@@ -69,8 +69,8 @@
                 </select>
               </div>
               <div class="form-group" v-for="selected in selectedSocials" :key="selected.id">
-                <label for="">{{selectedSocial(selected).name}} URL</label>
-                <input type="text" class="form-control" :name="selectedSocial(selected).id + '-url'" placeholder="url" required="required">
+                <label for="">{{selectedSocial(selected).name}} Username</label>
+                <input type="text" class="form-control" :name="'social-'+selectedSocial(selected).id " placeholder="username" required="required">
               </div>
             </div>
           </div>
@@ -120,9 +120,6 @@
         },
         mounted () {
           console.log(this.$parent.consoles);
-        },
-        computed: {
-          csrf: function () { return window.Laravel.csrfToken }
         }
     }
 </script>

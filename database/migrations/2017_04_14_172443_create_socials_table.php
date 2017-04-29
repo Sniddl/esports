@@ -16,6 +16,7 @@ class CreateSocialsTable extends Migration
         Schema::create('socials', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name')->unique();
+          $table->string('base_url')->unique();
           $table->string('type')->default('Social');
           $table->timestamps();
           $table->softDeletes();
@@ -23,26 +24,32 @@ class CreateSocialsTable extends Migration
 
         DB::table('socials')->insert([
           'name' => 'Reddit',
+          'base_url' => 'https://reddit.com/u/'
         ]);
 
         DB::table('socials')->insert([
           'name' => 'Twitter',
+          'base_url' => 'https://twitter.com/'
         ]);
 
         DB::table('socials')->insert([
           'name' => 'Instagram',
+          'base_url' => 'https://instagram.com/'
         ]);
 
         DB::table('socials')->insert([
           'name' => 'Facebook',
+          'base_url' => 'https://facebook.com/'
         ]);
 
         DB::table('socials')->insert([
           'name' => 'Google-Plus',
+          'base_url' => 'https://plus.google.com/'
         ]);
 
         DB::table('socials')->insert([
           'name' => 'YouTube',
+          'base_url' => 'https://youtube.com/'
         ]);
     }
 

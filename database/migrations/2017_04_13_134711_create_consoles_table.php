@@ -15,7 +15,7 @@ class CreateConsolesTable extends Migration
     {
         Schema::create('consoles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('type')->default('Console');
             $table->timestamps();
             $table->softDeletes();

@@ -40,7 +40,7 @@
       </div>
 
       <div class="panel-footer color-panel-headers">
-        <a v-for="social in socials" class="social-media color-panel-headers" :href="social.pivot.url">
+        <a v-for="social in socials" class="social-media color-panel-headers" :href="social.base_url + social.pivot.username">
           <i :class="'fa fa-' + social.name.toLowerCase()" aria-hidden="true"></i>
         </a>
       </div>

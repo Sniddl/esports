@@ -25,6 +25,7 @@ Route::post('/add/{thing}', 'CreationController@things');
 Route::post('/discordToggle', 'CreationController@discordToggle');
 Route::post('/discordInit', 'CreationController@discordInit');
 Route::post('/colors', 'CreationController@colors');
+Route::post('/edit/{thing}', 'EditController@player');
 Route::post('/delete', 'DeletionController@things');
 
 /*--------------

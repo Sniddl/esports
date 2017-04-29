@@ -18,7 +18,7 @@ class CreatePlayerSocialPivotTable extends Migration
             $table->integer('social_id')->unsigned()->index();
             $table->foreign('social_id')->references('id')->on('socials')->onDelete('cascade');
             $table->primary(['player_id', 'social_id']);
-            $table->string('url');
+            $table->string('username');
         });
     }
 
